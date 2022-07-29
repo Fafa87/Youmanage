@@ -65,5 +65,7 @@ def check_against_base(new_root, base_path, verbose=1):
         else:
             print(f"File {new_path} is a new file - new hash: {new_hash}.")
 
+
 if __name__ == "__main__":
-    fire.Fire()
+    fire.Fire({"check_against_base": check_against_base,
+               "prepare_hashionary": prepare_hashionary})
