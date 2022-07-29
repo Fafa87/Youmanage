@@ -1,3 +1,4 @@
+import collections
 import json
 import time
 
@@ -38,6 +39,18 @@ def prepare_hashionary(*filepaths, root_dir=None, save_path=None, known_path=Non
     return res
 
 
+def list_duplicates(base_path):
+    hash_base = load_hashionary(base_path)
+    per_hash = collections.defaultdict(list)
+    for path_to_file, hash in hash_base.items():
+        per_hash[hash].append(path_to_file)
+
+    hashes_with_duplicates = {h: l for h,l in per_hash.items() if len(l) > 1}
+    print(f"There are {len(hashes_with_duplicates)} hashes with duplicates.")
+    for h, l in hashes_with_duplicates.items():
+        print(f"There are {len(l)} files for hash {h}:\n\t{l}")
+
+
 def save_hashionary(hashionary, save_path):
     with open(save_path, "w") as file:
         json.dump(hashionary, file, indent=4, sort_keys=True)
@@ -68,4 +81,5 @@ def check_against_base(new_root, base_path, verbose=1):
 
 if __name__ == "__main__":
     fire.Fire({"check_against_base": check_against_base,
-               "prepare_hashionary": prepare_hashionary})
+               "prepare_hashionary": prepare_hashionary,
+               "list_duplicates": list_duplicates})

@@ -22,3 +22,7 @@ Prepare hashionary json for the given root:
 Check new root vs the already created hashionary:
 
 `python -m find_duplicates check_against_base --new_root D:\Fafa\MyResources\data\new_photos --base_path "C:\Users\Fafa\Desktop\Karty SD\4GB SD.json"`
+
+Find duplicates in the created hashionary:
+
+`python -m find_duplicates list_duplicates D:\Fafa\MyResources\Youmanage\data\myresources.json`
